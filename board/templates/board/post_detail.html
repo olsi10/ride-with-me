@@ -1,8 +1,78 @@
-<h2>{{ post.title }}</h2>
-<p>조회수: {{ post.views }}</p>
-<p>{{ post.content }}</p>
-{% if post.image %}
-  <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 200px;">
-{% else %}
-  사진 없음
-{% endif %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300&display=swap');
+
+  body {
+    background-color: #606C5D;
+    color: #F1C376;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Gowun Batang', serif;
+          height: 2000px;
+  }
+  a {
+    text-decoration: underline;
+    color: #F1C376;
+  }
+  .container {
+    width: 1920px;
+  }
+  .banner {
+    width: 100%;
+    height: 700px;
+  }
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    filter: brightness(30%);
+  }
+  .abs {
+    position: absolute;
+    top: 170px;
+    left: 783px;
+    font-size: 50px;
+    color: #fff;
+  }
+  .list {
+    width: 1200px;
+    margin: 100px auto;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 36px;
+  }
+
+  ul, li {
+    list-style: none;
+  }
+  .goto {
+    margin-top: 100px;
+  }
+</style>
+
+<div class="container">
+  <div class="banner">
+    <img src="https://images.unsplash.com/photo-1595749615144-6a89e2aa2c75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="">
+  </div>
+  <div class="abs">
+    <h1>국토종주</h1>
+    <h5>A Whole New World</h5>
+  </div>
+  <div class="list">
+    <div class="title">
+      <h2>{{ post.title }}</h2>
+      <p>조회수: {{ post.views }}</p>
+    </div>
+    <div class="item">
+      <p>{{ post.content }}</p>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 200px;">
+      {% else %}
+        사진 없음
+      {% endif %}
+    </div>
+      <a class="goto" href="{% url 'board:post_list' %}">리스트로 가기</a>
+  </div>
+</div>

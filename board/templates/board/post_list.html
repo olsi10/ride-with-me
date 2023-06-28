@@ -1,23 +1,118 @@
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300&display=swap');
+
   body {
-    background-color: white;
+    background-color: #606C5D;
+    color: #F1C376;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Gowun Batang', serif;
+      height: 2000px;
+  }
+  a {
+    text-decoration: underline;
+    color: #F1C376;
+      margin-right: 20px;
+  }
+  .container {
+    width: 1920px;
+  }
+  .banner {
+    width: 100%;
+    height: 700px;
+  }
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    filter: brightness(30%);
+  }
+  .abs {
+    position: absolute;
+    top: 170px;
+    left: 783px;
+    font-size: 50px;
+    color: #fff;
+  }
+  .list {
+    width: 1200px;
+    margin: 100px auto;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 36px;
+  }
+
+  ul, li {
+    list-style: none;
+  }
+
+  .item {
+    width: 100%;
+    border: 2px dotted;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  h3 {
+    font-size: 40px;
+      margin-right: 80px;
+  }
+  .item {
+      font-size: 36px;
+  }
+
+  h5 {margin-right: 20px}
+  input{
+      background-color: #606C5D;
+      color: #fff;
+      margin-top: 40px;
+      margin-right: 20px;
+      margin-left: 20px;
   }
 </style>
 
-<h2>게시물 목록</h2>
-<ul>
-{% for post in posts %}
-  <h3>{{ post.title }}</h3>
-  <p>조회수: {{ post.views }}</p>
-  <a href="{% url 'board:post_detail' post.pk %}">자세히 보기</a>
-    <form method="POST" action="{% url 'board:post_delete' post.id %}">
-  {% csrf_token %}
-  <input type="submit" value="삭제">
-  </form>
-  <a href="{% url 'board:post_edit' post.pk %}">수정</a>
-  {% empty %}
-  <li>게시물이 없습니다.</li>
-{% endfor %}
-</ul>
-<a href="{% url 'board:post_create' %}">글 작성</a>
+{% load static %}
+<audio id="background-music" src="{% static 'audio/django.mp3' %}" autoplay loop></audio>
+<div class="container">
+  <div class="banner">
+    <img src="https://images.unsplash.com/photo-1595749615144-6a89e2aa2c75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="">
+  </div>
+  <div class="abs">
+    <h1>국토종주</h1>
+    <h5>A Whole New World</h5>
+  </div>
+  <div class="list">
+    <div class="title">
+      <p>게시글</p>
+      <p><a href="{% url 'board:post_create' %}">작성하기</a></p>
+    </div>
+    <ul>
+      {% for post in posts %}
+      <div class="item">
+          <h3>{{ post.title }}</h3>
+          <h5>조회수: {{ post.views }}</h5>
+          <a href="{% url 'board:post_detail' post.pk %}">자세히</a>
+          <a href="{% url 'board:post_edit' post.pk %}">수정</a>
+          <form method="POST" action="{% url 'board:post_delete' post.id %}">
+              {% csrf_token %}
+              <input type="submit" value="삭제">
+          </form>
+          {% empty %}
+          <p>게시물이 없습니다.</p>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 
+<script>
+    // 페이지 로드 시 배경음악 재생
+    window.onload = function() {
+        var audio = document.getElementById('background-music');
+        audio.play();
+    };
+</script>
