@@ -1,0 +1,15 @@
+<h1>자전거 경로 목록</h1>
+
+<ul>
+  {% for post in posts %}
+    <li>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.path }}</p>
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" width="200">
+      <p>{{ post.content }}</p>
+      <hr>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'board:post_create' %}">글 작성</a>
