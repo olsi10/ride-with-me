@@ -1,0 +1,6 @@
+<h1>경로 수정하기</h1>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">저장</button>
+</form>

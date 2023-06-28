@@ -1,0 +1,8 @@
+<h2>{{ post.title }}</h2>
+<p>조회수: {{ post.views }}</p>
+<p>{{ post.content }}</p>
+{% if post.image %}
+  <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 200px;">
+{% else %}
+  사진 없음
+{% endif %}
